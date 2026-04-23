@@ -1,20 +1,18 @@
-Question:
+BÁO CÁO LAB 03 - OOP
+Sinh viên: Nguyễn Huy Quang
+MSSV: 202417015 (Ví dụ theo email của bạn)
 
-    "If you create a constructor method to build a DVD by title (String), and then you create another constructor method to build a DVD by category (String), does JAVA allow you to do this?"
+1. Sự khác biệt giữa String và StringBuffer/StringBuilder:
+- String: Là đối tượng "immutable" (bất biến). Mỗi khi nối chuỗi bằng toán tử "+", Java sẽ tạo ra một đối tượng String mới và sao chép dữ liệu cũ sang. Trong vòng lặp lớn, việc này tạo ra hàng triệu đối tượng rác (garbage), gây tốn bộ nhớ và giảm hiệu suất nghiêm trọng.
+- StringBuffer/StringBuilder: Là đối tượng "mutable" (có thể thay đổi). Nó sử dụng một mảng buffer để chứa dữ liệu và chỉ thay đổi trực tiếp trên mảng đó. Việc này giúp tiết kiệm bộ nhớ và thực thi cực nhanh trong các vòng lặp.
 
-Answer:
+2. Tại sao GarbageCreator lại làm chương trình chạy chậm hoặc treo?
+- Vì khi đọc một file lớn và nối chuỗi bằng "+", bộ nhớ Heap của Java bị lấp đầy bởi các đối tượng String tạm thời. Garbage Collector (GC) phải hoạt động liên tục để dọn dẹp, dẫn đến CPU bị quá tải và chương trình bị "lag".
 
-    No, Java does not allow this.
+3. Khi nào nên dùng StringBuilder và StringBuffer?
+- StringBuilder: Dùng khi làm việc với các ứng dụng đơn luồng (single-threaded) vì nó nhanh hơn.
+- StringBuffer: Dùng khi làm việc với đa luồng (multi-threaded) vì nó có cơ chế "thread-safe" (đồng bộ hóa).
 
-Reasoning (Explanation):
-In Java, Constructor Overloading is determined by the Method Signature. A signature consists of the method name and the parameter list (the number, type, and order of arguments).
-
-    Both title and category are of the same data type: String.
-
-    If you define:
-
-        public DigitalVideoDisc(String title) { ... }
-
-        public DigitalVideoDisc(String category) { ... }
-
-    The compiler sees both as DigitalVideoDisc(String). Since the signatures are identical, the compiler cannot distinguish between them and will throw a "Duplicate method" error.
+4. Giải thích về Classifier member (static) và Instance member:
+- Classifier member (static): Thuộc về lớp (Class). Tất cả các đối tượng đều dùng chung một giá trị duy nhất (Ví dụ: nbDigitalVideoDiscs).
+- Instance member: Thuộc về từng đối tượng cụ thể. Mỗi đối tượng có một giá trị riêng biệt (Ví dụ: id, title).
