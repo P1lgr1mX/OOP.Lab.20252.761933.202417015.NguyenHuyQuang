@@ -5,40 +5,44 @@ public class DigitalVideoDisc {
     private int length;
     private float cost;
 
+    // --- Bắt đầu phần thêm mới ---
+    // Biến static thuộc về lớp, dùng chung cho tất cả đối tượng
+    private static int nbDigitalVideoDiscs = 0;
+    
+    // Biến instance thuộc về từng đối tượng cụ thể
+    private int id;
+
+    // Cập nhật Constructor
     public DigitalVideoDisc(String title) {
         this.title = title;
-    }    
-    public DigitalVideoDisc(String category, String title, float cost) {
-        this.category = category;
-        this.title = title;
-        this.cost = cost;
+        
+        // Mỗi khi một đối tượng được tạo, tăng biến đếm và gán ID
+        nbDigitalVideoDiscs++;
+        this.id = nbDigitalVideoDiscs;
     }
-    public DigitalVideoDisc(String director, String category, String title, float cost) {
-        this.director = director;
-        this.category = category;
-        this.title = title;
-        this.cost = cost;
-    }
-    public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
+
+    // Bạn nên thêm các Constructor khác (nếu có) cũng phải tăng nbDigitalVideoDiscs
+    public DigitalVideoDisc(String title, String category, float cost) {
         this.title = title;
         this.category = category;
-        this.director = director;
-        this.length = length;
         this.cost = cost;
+        nbDigitalVideoDiscs++;
+        this.id = nbDigitalVideoDiscs;
     }
-    public String getTitle() {
-        return title;
+    
+    // Đừng quên thêm getter cho id để có thể kiểm tra
+    public int getId() {
+        return id;
     }
-    public String getCategory() {
-        return category;
+    
+    // Getter cho biến static (thường dùng static method)
+    public static int getNbDigitalVideoDiscs() {
+        return nbDigitalVideoDiscs;
     }
-    public String getDirector() {
-        return director;
-    }
-    public int getLength() {
-        return length;
-    }
-    public float getCost() {
-        return cost;
-    }
+    // --- Kết thúc phần thêm mới ---
+
+    // ... các getter/setter khác giữ nguyên ...
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+    public float getCost() { return cost; }
 }
