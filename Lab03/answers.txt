@@ -1,6 +1,6 @@
 BÁO CÁO LAB 03 - OOP
 Sinh viên: Nguyễn Huy Quang
-MSSV: 202417015 (Ví dụ theo email của bạn)
+MSSV: 202417015 
 
 1. Sự khác biệt giữa String và StringBuffer/StringBuilder:
 - String: Là đối tượng "immutable" (bất biến). Mỗi khi nối chuỗi bằng toán tử "+", Java sẽ tạo ra một đối tượng String mới và sao chép dữ liệu cũ sang. Trong vòng lặp lớn, việc này tạo ra hàng triệu đối tượng rác (garbage), gây tốn bộ nhớ và giảm hiệu suất nghiêm trọng.
