@@ -1,19 +1,49 @@
-package hust.soict.dsai.aims.cart;
-import hust.soict.dsai.aims.disc.DigitalVideoDisc;
-
 public class Cart {
     public static final int MAX_NUMBERS_ORDERED = 20;
     private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
     private int qtyOrdered = 0;
 
+    // --- CÁC PHƯƠNG THỨC THÊM (OVERLOADING) ---
+
+    // Thêm 1 DVD
     public void addDigitalVideoDisc(DigitalVideoDisc disc) {
         if (qtyOrdered < MAX_NUMBERS_ORDERED) {
             itemsOrdered[qtyOrdered] = disc;
             qtyOrdered++;
             System.out.println("The disc has been added.");
         } else {
-            System.out.println("The cart is full.");
+            System.out.println("The cart is almost full.");
         }
+    }
+
+    // Thêm một mảng các DVD
+    public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
+        for (DigitalVideoDisc disc : dvdList) {
+            addDigitalVideoDisc(disc);
+        }
+    }
+
+    // Thêm 2 DVD
+    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+        addDigitalVideoDisc(dvd1);
+        addDigitalVideoDisc(dvd2);
+    }
+
+    // --- CÁC PHƯƠNG THỨC QUẢN LÝ ---
+
+    public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
+        for (int i = 0; i < qtyOrdered; i++) {
+            if (itemsOrdered[i] == disc) {
+                for (int j = i; j < qtyOrdered - 1; j++) {
+                    itemsOrdered[j] = itemsOrdered[j + 1];
+                }
+                itemsOrdered[qtyOrdered - 1] = null;
+                qtyOrdered--;
+                System.out.println("The disc has been removed.");
+                return;
+            }
+        }
+        System.out.println("The disc is not in the cart.");
     }
 
     public float totalCost() {
@@ -23,6 +53,8 @@ public class Cart {
         }
         return total;
     }
+
+    // --- BÀI 5: PRINT & SEARCH ---
 
     public void print() {
         System.out.println("***********************CART***********************");
@@ -35,20 +67,22 @@ public class Cart {
     }
 
     public void searchById(int id) {
+        boolean found = false;
         for (int i = 0; i < qtyOrdered; i++) {
             if (itemsOrdered[i].getId() == id) {
-                System.out.println("Found: " + itemsOrdered[i].toString());
-                return;
+                System.out.println("Found match: " + itemsOrdered[i].toString());
+                found = true;
+                break;
             }
         }
-        System.out.println("No DVD found with ID: " + id);
+        if (!found) System.out.println("No DVD found with ID: " + id);
     }
 
     public void searchByTitle(String title) {
         boolean found = false;
         for (int i = 0; i < qtyOrdered; i++) {
             if (itemsOrdered[i].isMatch(title)) {
-                System.out.println("Found: " + itemsOrdered[i].toString());
+                System.out.println("Found match: " + itemsOrdered[i].toString());
                 found = true;
             }
         }
