@@ -1,11 +1,13 @@
+package hust.soict.dsai.aims.cart;
+
+import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+
 public class Cart {
     public static final int MAX_NUMBERS_ORDERED = 20;
     private DigitalVideoDisc itemsOrdered[] = new DigitalVideoDisc[MAX_NUMBERS_ORDERED];
     private int qtyOrdered = 0;
 
-    // --- CÁC PHƯƠNG THỨC THÊM (OVERLOADING) ---
-
-    // Thêm 1 DVD
+    // Thêm 1 DVD (Gốc)
     public void addDigitalVideoDisc(DigitalVideoDisc disc) {
         if (qtyOrdered < MAX_NUMBERS_ORDERED) {
             itemsOrdered[qtyOrdered] = disc;
@@ -16,20 +18,36 @@ public class Cart {
         }
     }
 
-    // Thêm một mảng các DVD
+    // 2.1. Overloading bằng mảng (Array)
     public void addDigitalVideoDisc(DigitalVideoDisc[] dvdList) {
         for (DigitalVideoDisc disc : dvdList) {
-            addDigitalVideoDisc(disc);
+            if (qtyOrdered < MAX_NUMBERS_ORDERED) {
+                addDigitalVideoDisc(disc);
+            } else {
+                System.out.println("The cart is almost full.");
+                break;
+            }
         }
     }
 
-    // Thêm 2 DVD
-    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
-        addDigitalVideoDisc(dvd1);
-        addDigitalVideoDisc(dvd2);
+    /* // 2.1. Thử nghiệm với Varargs (Arbitrary number of arguments)
+    // Bạn có thể dùng cái này thay cho mảng ở trên vì nó bao hàm cả mảng
+    public void addDigitalVideoDisc(DigitalVideoDisc... dvds) {
+        for (DigitalVideoDisc disc : dvds) {
+            addDigitalVideoDisc(disc);
+        }
     }
+    */
 
-    // --- CÁC PHƯƠNG THỨC QUẢN LÝ ---
+    // 2.2. Overloading bằng cách thay đổi số lượng tham số (2 DVD)
+    public void addDigitalVideoDisc(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+        if (qtyOrdered + 1 < MAX_NUMBERS_ORDERED) {
+            addDigitalVideoDisc(dvd1);
+            addDigitalVideoDisc(dvd2);
+        } else {
+            System.out.println("Not enough space for 2 DVDs.");
+        }
+    }
 
     public void removeDigitalVideoDisc(DigitalVideoDisc disc) {
         for (int i = 0; i < qtyOrdered; i++) {
@@ -52,40 +70,5 @@ public class Cart {
             total += itemsOrdered[i].getCost();
         }
         return total;
-    }
-
-    // --- BÀI 5: PRINT & SEARCH ---
-
-    public void print() {
-        System.out.println("***********************CART***********************");
-        System.out.println("Ordered Items:");
-        for (int i = 0; i < qtyOrdered; i++) {
-            System.out.println((i + 1) + ". " + itemsOrdered[i].toString());
-        }
-        System.out.println("Total cost: " + totalCost() + " $");
-        System.out.println("***************************************************");
-    }
-
-    public void searchById(int id) {
-        boolean found = false;
-        for (int i = 0; i < qtyOrdered; i++) {
-            if (itemsOrdered[i].getId() == id) {
-                System.out.println("Found match: " + itemsOrdered[i].toString());
-                found = true;
-                break;
-            }
-        }
-        if (!found) System.out.println("No DVD found with ID: " + id);
-    }
-
-    public void searchByTitle(String title) {
-        boolean found = false;
-        for (int i = 0; i < qtyOrdered; i++) {
-            if (itemsOrdered[i].isMatch(title)) {
-                System.out.println("Found match: " + itemsOrdered[i].toString());
-                found = true;
-            }
-        }
-        if (!found) System.out.println("No DVD found with title: " + title);
     }
 }

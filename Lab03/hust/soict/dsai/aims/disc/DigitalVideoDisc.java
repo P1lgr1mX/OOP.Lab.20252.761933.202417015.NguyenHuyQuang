@@ -1,82 +1,33 @@
 package hust.soict.dsai.aims.disc;
 
 public class DigitalVideoDisc {
-    // Biến static: Dùng chung cho cả lớp để đếm tổng số đĩa đã tạo
     private static int nbDigitalVideoDiscs = 0;
-    
-    // Biến instance: ID riêng biệt cho từng đối tượng
     private int id;
-    
     private String title;
     private String category;
     private String director;
     private int length;
     private float cost;
 
-    // --- CONSTRUCTORS ---
-    // Tất cả các constructor đều phải tăng nbDigitalVideoDiscs và gán id
+    // ... (Giữ nguyên các Constructor của bạn ở trên) ...
 
-    public DigitalVideoDisc(String title) {
-        this.title = title;
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
+    // --- PHẦN KẾT HỢP SAU KHI FIX CONFLICT ---
+
+    @Override
+    public String toString() {
+        return "DVD - " + title + " - " + (category != null ? category : "N/A") + 
+               " - " + (director != null ? director : "N/A") + 
+               " - " + length + ": " + cost + " $";
     }
 
-    public DigitalVideoDisc(String category, String title, float cost) {
-        this.category = category;
-        this.title = title;
-        this.cost = cost;
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
-    }
-
-    public DigitalVideoDisc(String director, String category, String title, float cost) {
-        this.director = director;
-        this.category = category;
-        this.title = title;
-        this.cost = cost;
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
-    }
-
-    public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-        this.title = title;
-        this.category = category;
-        this.director = director;
-        this.length = length;
-        this.cost = cost;
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
-    }
-
-    // --- GETTERS & SETTERS ---
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    // Cần thêm Setter cho title để phục vụ bài Pass-by-value lúc nãy
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public String getDirector() {
-        return director;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public float getCost() {
-        return cost;
-    }
+    // Giữ đầy đủ Getters để các lớp khác (Cart, Store) không bị lỗi
+    public int getId() { return id; }
+    public String getTitle() { return title; }
+    public String getCategory() { return category; }
+    public String getDirector() { return director; }
+    public int getLength() { return length; }
+    public float getCost() { return cost; }
+    
+    // Setter cho title phục vụ bài test
+    public void setTitle(String title) { this.title = title; }
 }
