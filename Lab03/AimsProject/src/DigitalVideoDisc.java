@@ -1,48 +1,40 @@
+package hust.soict.dsai.aims.disc; 
+
 public class DigitalVideoDisc {
     private String title;
     private String category;
     private String director;
     private int length;
     private float cost;
-
-    // --- Bắt đầu phần thêm mới ---
-    // Biến static thuộc về lớp, dùng chung cho tất cả đối tượng
     private static int nbDigitalVideoDiscs = 0;
-    
-    // Biến instance thuộc về từng đối tượng cụ thể
     private int id;
 
-    // Cập nhật Constructor
-    public DigitalVideoDisc(String title) {
-        this.title = title;
-        
-        // Mỗi khi một đối tượng được tạo, tăng biến đếm và gán ID
-        nbDigitalVideoDiscs++;
-        this.id = nbDigitalVideoDiscs;
-    }
-
-    // Bạn nên thêm các Constructor khác (nếu có) cũng phải tăng nbDigitalVideoDiscs
-    public DigitalVideoDisc(String title, String category, float cost) {
+    public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
         this.title = title;
         this.category = category;
+        this.director = director;
+        this.length = length;
         this.cost = cost;
         nbDigitalVideoDiscs++;
         this.id = nbDigitalVideoDiscs;
     }
-    
-    // Đừng quên thêm getter cho id để có thể kiểm tra
-    public int getId() {
-        return id;
-    }
-    
-    // Getter cho biến static (thường dùng static method)
-    public static int getNbDigitalVideoDiscs() {
-        return nbDigitalVideoDiscs;
-    }
-    // --- Kết thúc phần thêm mới ---
 
-    // ... các getter/setter khác giữ nguyên ...
+    // --- CÁC PHƯƠNG THỨC BỔ SUNG ---
+
+    @Override
+    public String toString() {
+        return "DVD - " + title + " - " + category + " - " + (director != null ? director : "Unknown") 
+               + " - " + length + " mins: " + cost + " $";
+    }
+
+    public boolean isMatch(String title) {
+        if (this.title == null || title == null) return false;
+        return this.title.toLowerCase().contains(title.toLowerCase());
+    }
+
+
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
     public float getCost() { return cost; }
+    public int getId() { return id; }
 }
