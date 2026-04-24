@@ -1,4 +1,4 @@
-package hust.soict.dsai.aims.disc; 
+package hust.soict.dsai.aims.disc;
 
 public class DigitalVideoDisc {
     private String title;
@@ -19,22 +19,17 @@ public class DigitalVideoDisc {
         this.id = nbDigitalVideoDiscs;
     }
 
-    // --- CÁC PHƯƠNG THỨC BỔ SUNG ---
-
     @Override
     public String toString() {
-        return "DVD - " + title + " - " + category + " - " + (director != null ? director : "Unknown") 
-               + " - " + length + " mins: " + cost + " $";
+        return "DVD - " + title + " - " + (category != null ? category : "N/A") + 
+               " - " + (director != null ? director : "N/A") + 
+               " - " + length + ": " + cost + " $";
     }
-
-    public boolean isMatch(String title) {
-        if (this.title == null || title == null) return false;
-        return this.title.toLowerCase().contains(title.toLowerCase());
-    }
-
 
     public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
     public float getCost() { return cost; }
     public int getId() { return id; }
+
+
+    public void setTitle(String title) { this.title = title; }
 }
