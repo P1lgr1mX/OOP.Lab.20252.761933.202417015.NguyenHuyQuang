@@ -19,13 +19,6 @@ public class DigitalVideoDisc {
         this.id = nbDigitalVideoDiscs;
     }
 
-    // --- CÁC PHƯƠNG THỨC BỔ SUNG ---
-
-    @Override
-    public String toString() {
-        return "DVD - " + title + " - " + category + " - " + (director != null ? director : "Unknown") 
-               + " - " + length + " mins: " + cost + " $";
-    }
 
     public boolean isMatch(String title) {
         if (this.title == null || title == null) return false;
