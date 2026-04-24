@@ -9,10 +9,15 @@ public class DigitalVideoDisc {
     private int length;
     private float cost;
 
-    // ... (Giữ nguyên các Constructor của bạn ở trên) ...
 
-    // --- PHẦN KẾT HỢP SAU KHI FIX CONFLICT ---
 
+    // 1. Giữ hàm isMatch của nhánh Search
+    public boolean isMatch(String title) {
+        if (this.title == null || title == null) return false;
+        return this.title.toLowerCase().contains(title.toLowerCase());
+    }
+
+    // 2. Giữ hàm toString của nhánh Main
     @Override
     public String toString() {
         return "DVD - " + title + " - " + (category != null ? category : "N/A") + 
@@ -20,7 +25,7 @@ public class DigitalVideoDisc {
                " - " + length + ": " + cost + " $";
     }
 
-    // Giữ đầy đủ Getters để các lớp khác (Cart, Store) không bị lỗi
+    // 3. Giữ đầy đủ Getters/Setters để không lỗi logic hệ thống
     public int getId() { return id; }
     public String getTitle() { return title; }
     public String getCategory() { return category; }
@@ -28,6 +33,5 @@ public class DigitalVideoDisc {
     public int getLength() { return length; }
     public float getCost() { return cost; }
     
-    // Setter cho title phục vụ bài test
     public void setTitle(String title) { this.title = title; }
 }
