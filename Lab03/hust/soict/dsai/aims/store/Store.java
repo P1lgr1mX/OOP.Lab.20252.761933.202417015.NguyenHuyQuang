@@ -1,3 +1,8 @@
+package hust.soict.dsai.aims.store;
+
+import hust.soict.dsai.aims.disc.DigitalVideoDisc;
+
+// Dán toàn bộ nội dung class Store của bạn vào đây
 public class Store {
     private DigitalVideoDisc itemsInStore[];
     private int qtyInStore = 0;
