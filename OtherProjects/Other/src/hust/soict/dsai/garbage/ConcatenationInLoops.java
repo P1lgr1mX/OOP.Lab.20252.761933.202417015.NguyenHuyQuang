@@ -10,7 +10,7 @@ public class ConcatenationInLoops {
         for (int i = 0; i < 65536; i++) {
             s += r.nextInt(2);
         }
-        System.out.println("Time with + operator: " + (System.currentTimeMillis() - start) + " ms");
+        System.out.println(System.currentTimeMillis() - start); // In ra khoảng 4500
 
         r = new Random(123);
         start = System.currentTimeMillis();
@@ -19,6 +19,6 @@ public class ConcatenationInLoops {
             sb.append(r.nextInt(2));
         }
         s = sb.toString();
-        System.out.println("Time with StringBuilder: " + (System.currentTimeMillis() - start) + " ms");
+        System.out.println(System.currentTimeMillis() - start); // In ra khoảng 5
     }
 }
