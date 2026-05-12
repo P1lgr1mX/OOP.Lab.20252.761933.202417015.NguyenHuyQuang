@@ -17,6 +17,22 @@ Dưới đây là cách em hiểu để không bị nhầm lẫn giữa kiểu n
 
 
 
+Cau 1 
+Java là ngôn ngữ Pass-by-value (truyền tham trị) 100%, không có ngoại lệ.
+
+Dưới đây là cách em hiểu để không bị nhầm lẫn giữa kiểu nguyên thủy và đối tượng:
+
+    Với kiểu dữ liệu nguyên thủy (int, float...): Khi truyền vào hàm, Java copy cái giá trị đó ra một ô nhớ mới. Mình có thay đổi gì trong hàm thì biến gốc bên ngoài vẫn giữ nguyên. Cái này thì rõ ràng rồi ạ.
+
+    Với kiểu đối tượng (Object): Đây là chỗ dễ gây tranh cãi nhất. Thực tế, biến đối tượng trong Java bản chất là một "tay cầm" (địa chỉ vùng nhớ). Khi truyền vào hàm, Java copy cái địa chỉ đó.
+
+        Vì cả biến gốc và biến trong hàm đều cầm chung một địa chỉ, nên nếu mình dùng biến trong hàm để sửa dữ liệu bên trong đối tượng (như setTen, setTuoi) thì đối tượng gốc sẽ bị thay đổi.
+
+        Nhưng nếu mình gán biến đó cho một đối tượng mới hoàn toàn (d = new Dog()), thì chỉ có cái biến tạm trong hàm bị đổi hướng thôi, còn biến gốc ở ngoài vẫn trỏ vào đối tượng cũ.
+
+
+
+
 1. Sự khác biệt giữa String và StringBuffer/StringBuilder:
 - String: Là đối tượng "immutable" (bất biến). Mỗi khi nối chuỗi bằng toán tử "+", Java sẽ tạo ra một đối tượng String mới và sao chép dữ liệu cũ sang. Trong vòng lặp lớn, việc này tạo ra hàng triệu đối tượng rác (garbage), gây tốn bộ nhớ và giảm hiệu suất nghiêm trọng.
 - StringBuffer/StringBuilder: Là đối tượng "mutable" (có thể thay đổi). Nó sử dụng một mảng buffer để chứa dữ liệu và chỉ thay đổi trực tiếp trên mảng đó. Việc này giúp tiết kiệm bộ nhớ và thực thi cực nhanh trong các vòng lặp.
