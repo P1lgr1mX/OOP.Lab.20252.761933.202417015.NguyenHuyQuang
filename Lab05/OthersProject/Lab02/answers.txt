@@ -1,0 +1,20 @@
+Question:
+
+    "If you create a constructor method to build a DVD by title (String), and then you create another constructor method to build a DVD by category (String), does JAVA allow you to do this?"
+
+Answer:
+
+    No, Java does not allow this.
+
+Reasoning (Explanation):
+In Java, Constructor Overloading is determined by the Method Signature. A signature consists of the method name and the parameter list (the number, type, and order of arguments).
+
+    Both title and category are of the same data type: String.
+
+    If you define:
+
+        public DigitalVideoDisc(String title) { ... }
+
+        public DigitalVideoDisc(String category) { ... }
+
+    The compiler sees both as DigitalVideoDisc(String). Since the signatures are identical, the compiler cannot distinguish between them and will throw a "Duplicate method" error.

@@ -1,0 +1,16 @@
+Student Name: Nguyễn Huy Quang 
+Student ID: 202417015
+
+Answers for Lab 01 - Section 6.1:
+
+1. What happens if users choose "Cancel"?
+Answer: If the user chooses "Cancel", the method JOptionPane.showConfirmDialog returns the value JOptionPane.CANCEL_OPTION (which is an integer value of 2). In the current code logic, since this is not equal to YES_OPTION, the program will display "You've chosen: No".
+
+2. How to customize the options to users, e.g. only two options: "Yes" and "No", OR "I do" and "I don't"?
+Answer: To customize the options, we can use the showOptionDialog() method instead of showConfirmDialog().
+- For "Yes" and "No" only: Use JOptionPane.YES_NO_OPTION as the optionType parameter.
+- For custom labels like "I do" and "I don't": We can pass an array of Strings as the 'options' parameter.
+  Example:
+  String[] options = {"I do", "I don't"};
+  JOptionPane.showOptionDialog(null, "Message", "Title",
+      JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
