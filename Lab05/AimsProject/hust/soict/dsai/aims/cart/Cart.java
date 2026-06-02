@@ -1,0 +1,70 @@
+package hust.soict.dsai.aims.cart;
+
+import hust.soict.dsai.aims.media.Media;
+import hust.soict.dsai.aims.media.MediaComparator;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import java.util.Collections;
+
+public class Cart {
+    public static final int MAX_NUMBERS_ORDERED = 20;
+    private ObservableList<Media> itemsOrdered = FXCollections.observableArrayList();
+
+    public void addMedia(Media media) {
+        if (itemsOrdered.size() < MAX_NUMBERS_ORDERED) {
+            itemsOrdered.add(media);
+            System.out.println("The media has been added.");
+        } else {
+            System.out.println("The cart is almost full.");
+        }
+    }
+
+    public void addMedia(Media[] mediaList) {
+        for (Media media : mediaList) {
+            if (itemsOrdered.size() < MAX_NUMBERS_ORDERED) {
+                itemsOrdered.add(media);
+            } else {
+                System.out.println("The cart is almost full.");
+                break;
+            }
+        }
+    }
+
+    public void addMedia(Media media1, Media media2) {
+        if (itemsOrdered.size() + 1 < MAX_NUMBERS_ORDERED) {
+            itemsOrdered.add(media1);
+            itemsOrdered.add(media2);
+        } else {
+            System.out.println("Not enough space for 2 medias.");
+        }
+    }
+
+    public void removeMedia(Media media) {
+        if (itemsOrdered.contains(media)) {
+            itemsOrdered.remove(media);
+            System.out.println("The media has been removed.");
+        } else {
+            System.out.println("The media is not in the cart.");
+        }
+    }
+
+    public float totalCost() {
+        float total = 0;
+        for (Media media : itemsOrdered) {
+            total += media.getCost();
+        }
+        return total;
+    }
+
+    public ObservableList<Media> getItemsOrdered() {
+        return itemsOrdered;
+    }
+
+    public void sortByTitleCost() {
+        Collections.sort(itemsOrdered, MediaComparator.COMPARE_BY_TITLE_COST);
+    }
+
+    public void sortByCostTitle() {
+        Collections.sort(itemsOrdered, MediaComparator.COMPARE_BY_COST_TITLE);
+    }
+}

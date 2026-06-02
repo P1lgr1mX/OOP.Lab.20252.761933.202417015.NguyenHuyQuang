@@ -1,0 +1,25 @@
+1. What class should implement the Comparable interface?
+The Media class should implement the Comparable<Media> interface. Because the Cart maintains a collection of Media objects, implementing the interface at the parent level ensures that all subclasses (Book, DigitalVideoDisc, CompactDisc) inherit the natural ordering behavior and can be compared against one another.
+
+2. In those classes, how should you implement the compareTo() method be to reflect the ordering that we want?
+In the Media class, you override the public int compareTo(Media other) method. To sort by title and then by cost (higher cost first), you first compare the titles using String.compareTo(). If the titles are identical (the result is 0), you then compare their costs in descending order (e.g., using Float.compare(other.getCost(), this.getCost())).
+
+3. Can we have two ordering rules of the item (by title then cost and by cost then title) if we use this Comparable interface approach?
+No. The Comparable interface is designed to define a single, default natural ordering for a class because a class can only override the compareTo() method once. For multiple ordering rules, the Comparator interface must be used instead.
+
+4. Suppose the DVDs has a different ordering rule from the other media types, that is by title, then decreasing length, then cost. How would you modify your code to allow this?
+You would override the compareTo(Media other) method specifically inside the DigitalVideoDisc subclass. Inside the method, use "instanceof" to check if the "other" object is also a DigitalVideoDisc. If it is, compare their titles. If titles match, compare their lengths in decreasing order. If lengths also match, compare their costs. If the "other" object is not a DVD, simply fall back to the default comparison by returning super.compareTo(other).
+
+Lab 05 Answers:
+1. Comparison between Swing and AWT top-level containers:
+- AWT: Frame, Dialog, Applet.
+- Swing: JFrame, JDialog, JApplet.
+Swing's top-level containers are heavyweight, but their components are lightweight and must be added to a content-pane.
+
+2. Comparison between AWT and Swing component names:
+Swing component classes typically start with a 'J' prefix followed by the AWT component name.
+Examples:
+- Label (AWT) -> JLabel (Swing)
+- Button (AWT) -> JButton (Swing)
+- TextField (AWT) -> JTextField (Swing)
+- Panel (AWT) -> JPanel (Swing)
